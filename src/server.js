@@ -11,33 +11,10 @@ const cors = require("cors"); // ✅ IMPORTANDO CORS
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 💡 CONFIGURAÇÃO CORS EXPLÍCITA (RESOLVE O ERRO DE BLOQUEIO DO FRONTEND)
-// Definimos as origens permitidas: o localhost (para desenvolvimento) e o domínio de produção.
-const allowedOrigins = [
-  "http://localhost:4200", // Permite o ambiente de desenvolvimento do Angular
-  "https://resume-api-seven-sigma.vercel.app", // ⚠️ DOMÍNIO DE PRODUÇÃO CORRIGIDO
-  "https://gesieloliveira.com.br", // Domínio customizado, se houver
-];
-
-const corsOptions = {
-  // A função de origem verifica se a origem da requisição está na lista
-  origin: (origin, callback) => {
-    // Permite requisições sem 'origin' (Postman/cURL) ou se estiver na lista
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      // Retorna um erro que será visível nos logs da Vercel
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: "GET", // Sua API só precisa de GET por enquanto
-  credentials: true,
-};
-
 // 3. MIDDLEWARES
-app.use(cors(corsOptions)); // ✅ USANDO CORS COM AS OPÇÕES
+// 💡 CONFIGURAÇÃO CORS MAIS SIMPLES: Permite todas as origens (Solução de compatibilidade)
+app.use(cors());
 app.use(express.json());
-
 // 4. CONFIGURAÇÃO DA POOL DE CONEXÃO
 const connectionString = process.env.DATABASE_URL;
 
