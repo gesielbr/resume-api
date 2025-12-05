@@ -3,3 +3,4 @@
 
 # Exclui o arquivo de variáveis secretas
 .env
+.vercel
