@@ -44,7 +44,7 @@ app.get("/api/categorias", async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error("\n=============================================");
-    console.error("❌ ERRO FATAL DE CONEXÃO/QUERY COM O SUPABASE:");
+    console.error("❌ ERRO FATAL NA ROTA /api/categorias");
     console.error(`Detalhe do Erro: ${error.message}`);
     console.error("=============================================\n");
     res.status(500).json({
@@ -99,12 +99,48 @@ app.get("/api/skills", async (req, res) => {
     res.json(formattedData);
   } catch (error) {
     console.error("\n=============================================");
-    console.error("❌ ERRO FATAL DE CONEXÃO/QUERY COM O SUPABASE:");
+    console.error("❌ ERRO FATAL NA ROTA /api/skills");
     console.error(`Detalhe do Erro: ${error.message}`);
     console.error("=============================================\n");
 
     res.status(500).json({
       error: "Erro no Servidor: Falha ao acessar o Supabase",
+      detail: error.message,
+    });
+  }
+});
+
+// ROTA PARA FORMAÇÃO (simples e direta)
+app.get("/api/formacao", async (req, res) => {
+  try {
+    const query = `
+      SELECT
+        id,
+        curso,
+        instituicao,
+        periodo
+      FROM formacao
+      ORDER BY id ASC;
+    `;
+
+    const result = await pool.query(query);
+
+    const formattedData = result.rows.map((row) => ({
+      id: row.id,
+      curso: row.curso,
+      instituicao: row.instituicao,
+      periodo: row.periodo,
+    }));
+
+    res.json(formattedData);
+  } catch (error) {
+    console.error("\n=============================================");
+    console.error("❌ ERRO FATAL NA ROTA /api/formacao");
+    console.error(`Detalhe do Erro: ${error.message}`);
+    console.error("=============================================\n");
+
+    res.status(500).json({
+      error: "Erro no Servidor: Falha ao acessar a Formação",
       detail: error.message,
     });
   }
