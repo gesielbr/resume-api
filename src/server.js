@@ -15,7 +15,8 @@ const PORT = process.env.PORT || 3000;
 // Definimos as origens permitidas: o localhost (para desenvolvimento) e o domínio de produção.
 const allowedOrigins = [
   "http://localhost:4200", // Permite o ambiente de desenvolvimento do Angular
-  "https://gesieloliveira.com.br", // ⚠️ SUBSTITUA PELO SEU DOMÍNIO DE PRODUÇÃO REAL
+  "https://resume-api-seven-sigma.vercel.app", // ⚠️ DOMÍNIO DE PRODUÇÃO CORRIGIDO
+  "https://gesieloliveira.com.br", // Domínio customizado, se houver
 ];
 
 const corsOptions = {
@@ -25,6 +26,7 @@ const corsOptions = {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      // Retorna um erro que será visível nos logs da Vercel
       callback(new Error("Not allowed by CORS"));
     }
   },
