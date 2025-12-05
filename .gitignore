@@ -1,0 +1,5 @@
+# Exclui a pasta de dependências
+/node_modules
+
+# Exclui o arquivo de variáveis secretas
+.env
