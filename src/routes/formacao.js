@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     const query = `
       SELECT id, curso, instituicao, periodo
       FROM formacao
-      ORDER BY id ASC;
+      ORDER BY priority ASC, id ASC;
     `;
 
     const result = await pool.query(query);
