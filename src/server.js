@@ -6,6 +6,7 @@ const cors = require("cors");
 const categoriasRoutes = require("./routes/categorias");
 const skillsRoutes = require("./routes/skills");
 const formacaoRoutes = require("./routes/formacao");
+const experiencesRoutes = require("./routes/experiences");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/api/categorias", categoriasRoutes);
 app.use("/api/skills", skillsRoutes);
 app.use("/api/formacao", formacaoRoutes);
+app.use("/api/experiences", experiencesRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
