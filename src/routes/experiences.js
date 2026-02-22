@@ -17,9 +17,19 @@ router.get("/", async (req, res) => {
 
     if (error) throw error;
 
-    res.json(data);
+    // ✅ evita cache no browser, proxy e CDN da Vercel
+    res.setHeader(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+    res.setHeader("Surrogate-Control", "no-store");
+
+    return res.status(200).json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Erro ao buscar experiences:", err.message);
+    return res.status(500).json({ error: err.message });
   }
 });
 
