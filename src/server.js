@@ -7,6 +7,7 @@ const categoriasRoutes = require("./routes/categorias");
 const skillsRoutes = require("./routes/skills");
 const formacaoRoutes = require("./routes/formacao");
 const experiencesRoutes = require("./routes/experiences");
+const idiomasRoutes = require("./routes/idiomas");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ app.use("/api/categorias", categoriasRoutes);
 app.use("/api/skills", skillsRoutes);
 app.use("/api/formacao", formacaoRoutes);
 app.use("/api/experiences", experiencesRoutes);
+app.use("/api/idiomas", idiomasRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
