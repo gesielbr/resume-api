@@ -5,8 +5,21 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
+    res.set("Cache-Control", "no-store");
+
     const query = `
-      SELECT id, curso, instituicao, periodo
+      SELECT 
+        id,
+        curso,
+        curso_en,
+        curso_es,
+        instituicao,
+        instituicao_en,
+        instituicao_es,
+        periodo,
+        periodo_en,
+        periodo_es,
+        priority
       FROM formacao
       ORDER BY priority ASC, id ASC;
     `;
